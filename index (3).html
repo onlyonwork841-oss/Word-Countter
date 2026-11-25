@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickTools – Free Word Counter &amp; Percentage Calculator</title>
+<meta name="description" content="Free simple online tools: word counter and percentage calculator. No sign-up needed.">
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --text:#1c2333; --muted:#5b6478;
+    --accent:#2563eb; --line:#dfe4ee; --adbg:#eef1f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#10141f; --card:#1a2030; --text:#e8ecf5; --muted:#9aa4b8; --accent:#6aa0ff; --line:#2a3248; --adbg:#151b2a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
+  .logo{font-weight:800;font-size:1.25rem;color:var(--accent);text-decoration:none}
+  nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-size:.95rem}
+  nav a:hover{color:var(--accent)}
+  h1{font-size:1.9rem;margin:24px 0 4px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .layout{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+  @media(max-width:860px){.layout{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:20px}
+  .card h2{margin-top:0;font-size:1.25rem}
+  textarea,input{width:100%;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
+  textarea{min-height:150px;resize:vertical}
+  textarea:focus,input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:12px}
+  .stat{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center}
+  .stat b{display:block;font-size:1.4rem;color:var(--accent)}
+  .stat span{font-size:.85rem;color:var(--muted)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .row input{flex:1;min-width:110px}
+  .result{font-size:1.2rem;font-weight:700;color:var(--accent);margin-top:6px}
+
+  /* ---- AD SLOTS ---- */
+  .ad{background:var(--adbg);border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;margin:0 auto 20px;overflow:hidden;text-align:center}
+  .ad-top{width:100%;max-width:728px;min-height:90px}
+  .ad-side{width:300px;max-width:100%;min-height:250px}
+  .ad-inline{width:100%;max-width:728px;min-height:90px}
+  .ad-label{display:block;font-size:.7rem;color:var(--muted);text-align:center;margin-bottom:4px}
+
+  footer{border-top:1px solid var(--line);background:var(--card);padding:24px 0;margin-top:20px;color:var(--muted);font-size:.9rem}
+  footer a{color:var(--muted)}
+  .legal{margin-top:10px}
+  .legal h3{margin:14px 0 4px;font-size:1rem;color:var(--text)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">QuickTools</a>
+    <nav>
+      <a href="#words">Word Counter</a>
+      <a href="#percent">Percentage</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Free online tools that just work</h1>
+  <p class="sub">Count words and calculate percentages instantly. No sign-up, nothing to install.</p>
+
+  <!-- AD 1: Top banner (728x90) -->
+  <span class="ad-label">Advertisement</span>
+  <div class="ad ad-top" id="ad-top">
+    <!-- PASTE YOUR ADSTERRA BANNER 728x90 CODE HERE (replace this text) -->
+    Ad space 728×90
+  </div>
+
+  <div class="layout">
+    <div>
+      <section class="card" id="words">
+        <h2>Word counter</h2>
+        <textarea id="text" placeholder="Type or paste your text here..."></textarea>
+        <div class="stats">
+          <div class="stat"><b id="w">0</b><span>Words</span></div>
+          <div class="stat"><b id="c">0</b><span>Characters</span></div>
+          <div class="stat"><b id="s">0</b><span>Sentences</span></div>
+          <div class="stat"><b id="r">0</b><span>Min to read</span></div>
+        </div>
+      </section>
+
+      <!-- AD 2: In-content banner -->
+      <span class="ad-label">Advertisement</span>
+      <div class="ad ad-inline" id="ad-inline">
+        <!-- PASTE YOUR ADSTERRA BANNER CODE HERE -->
+        Ad space 728×90
+      </div>
+
+      <section class="card" id="percent">
+        <h2>Percentage calculator</h2>
+        <div class="row">
+          <span>What is</span>
+          <input id="p1" type="number" placeholder="%" aria-label="Percent">
+          <span>% of</span>
+          <input id="p2" type="number" placeholder="number" aria-label="Number">
+        </div>
+        <div class="result" id="pr1">–</div>
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+        <div class="row">
+          <input id="q1" type="number" placeholder="number" aria-label="Part">
+          <span>is what % of</span>
+          <input id="q2" type="number" placeholder="number" aria-label="Whole">
+        </div>
+        <div class="result" id="pr2">–</div>
+      </section>
+
+      <section class="card" id="about">
+        <h2>About QuickTools</h2>
+        <p>QuickTools is a small collection of free utilities for everyday tasks. Everything runs in your browser, so the text and numbers you enter are never uploaded or stored.</p>
+        <p>The site is supported by advertising, which helps keep the tools free.</p>
+      </section>
+    </div>
+
+    <aside>
+      <!-- AD 3: Sidebar (300x250) -->
+      <span class="ad-label">Advertisement</span>
+      <div class="ad ad-side" id="ad-side">
+        <!-- PASTE YOUR ADSTERRA BANNER 300x250 CODE HERE -->
+        Ad space 300×250
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr"></span> QuickTools. All rights reserved.</div>
+    <div class="legal">
+      <h3>Privacy Policy</h3>
+      <p>We do not collect personal information through the tools. Third-party advertising partners, such as Adsterra, may use cookies to show relevant ads. You can disable cookies in your browser settings.</p>
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- OPTIONAL: Paste Adsterra Social Bar / Popunder script here, just before </body> -->
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const t = document.getElementById('text');
+  function count(){
+    const v = t.value;
+    const words = (v.trim().match(/\S+/g) || []).length;
+    const sentences = (v.match(/[^.!?]+[.!?]+/g) || []).length;
+    document.getElementById('w').textContent = words;
+    document.getElementById('c').textContent = v.length;
+    document.getElementById('s').textContent = sentences;
+    document.getElementById('r').textContent = words ? Math.max(1, Math.round(words/200)) : 0;
+  }
+  t.addEventListener('input', count);
+
+  function fmt(n){ return Number.isFinite(n) ? +n.toFixed(4) : '–'; }
+  function p1(){
+    const a = parseFloat(document.getElementById('p1').value);
+    const b = parseFloat(document.getElementById('p2').value);
+    document.getElementById('pr1').textContent = (isNaN(a)||isNaN(b)) ? '–' : fmt(a/100*b);
+  }
+  function p2(){
+    const a = parseFloat(document.getElementById('q1').value);
+    const b = parseFloat(document.getElementById('q2').value);
+    document.getElementById('pr2').textContent = (isNaN(a)||isNaN(b)||b===0) ? '–' : fmt(a/b*100) + '%';
+  }
+  ['p1','p2'].forEach(id => document.getElementById(id).addEventListener('input', p1));
+  ['q1','q2'].forEach(id => document.getElementById(id).addEventListener('input', p2));
+</script>
+</body>
+</html>
