@@ -1,0 +1,5 @@
+# Plain static site: a single self-contained HTML page with no dependencies,
+# so there is no build step. The repository root is published as-is.
+[build]
+  publish = "."
+  command = ""
